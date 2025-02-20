@@ -1,0 +1,12 @@
+<div class="screen-wrapper">
+    <div class="header">
+        <button class="back-btn" @click="goBack">Назад</button>
+    </div>
+
+    <h2>Темы по грамматике</h2>
+    <ul class="topic-list">
+        <li v-for="topic in grammarTopics" :key="topic">
+            <button class="topic-btn">{{ topic }}</button>
+        </li>
+    </ul>
+</div>

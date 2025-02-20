@@ -1,0 +1,134 @@
+/* Общий контейнер */
+.quiz-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* Отладочный блок */
+.debug {
+    background-color: #e0e0e0;
+    padding: 8px;
+    margin-bottom: 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+/* Полоса прогресса */
+.progress-container {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.progress-bar {
+    width: 80vw;
+    height: 12px;
+    margin: 0 auto;
+    background-color: #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #90caf9;
+    transition: width 0.5s;
+}
+
+.progress-text {
+    margin-top: 8px;
+    font-size: 0.9rem;
+}
+
+/* Карточка квиза */
+.quiz-card {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+}
+
+.question {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.question-translation {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 16px;
+}
+
+.answers {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 320px;
+    width: 100%;
+}
+
+.answer-btn {
+    width: 100%;
+    background-color: #fce070;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.answer-btn:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+}
+
+.answer-btn.correct {
+    background-color: #a7e9af;
+}
+
+.answer-btn.wrong {
+    background-color: #f4a9a8;
+}
+
+/* Нижняя панель */
+.bottom-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+/* Контейнер кнопок */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Кнопка "Назад" */
+.back-btn {
+    background-color: #fce070;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.back-btn:hover {
+    background-color: #fbe15a;
+    transform: scale(1.02);
+}

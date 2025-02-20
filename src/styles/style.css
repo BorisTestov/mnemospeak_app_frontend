@@ -1,0 +1,47 @@
+button {
+    background-color: var(--light-yellow);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: auto; /* Отправляет кнопку вниз */
+    margin-bottom: 16px; /* Отступ от нижнего края */
+    transition: transform 0.2s, background-color 0.2s;
+    max-width: var(--max-button-width)
+}
+button:hover {
+    cursor: pointer;
+    background-color: var(--yellow);
+    transform: scale(1.02);
+}
+button:active {
+    transform: scale(0.98);
+}
+
+/* Общие стили приложения */
+.app-container {
+    background-color: var(--background-color);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px;
+    margin: 0 auto;
+}
