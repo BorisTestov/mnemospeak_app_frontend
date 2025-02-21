@@ -1,4 +1,5 @@
 import { useRouter } from 'vue-router'
+import { useLevelStore } from '@stores/LanguageLevel'
 
 export function useNavigation() {
     const router = useRouter()
@@ -34,6 +35,12 @@ export function useNavigation() {
 
         goStatistics: (): void => {
             router.push({name: 'Statistics'})
+        },
+
+        chooseLevel: (level: string): void => {
+            const levelStore = useLevelStore()
+            levelStore.setLevel(level)
+            router.push({ name: 'Mode' })
         }
     }
 }
