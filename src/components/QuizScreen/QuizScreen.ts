@@ -1,87 +1,45 @@
 import { ref, computed, onMounted } from 'vue'
 import { useNavigation } from '@/navigation'
-
+import { post } from '@/api';
 import { useTelegramUserStore } from '@stores/TelegramUser'
 import { useLevelStore } from '@stores/LanguageLevel'
-import {api_endpoint} from "@/config.ts"
+import { Question } from '@/api_models'
 
-interface Question {
-    id: number
-    text: string
-    options: Array<{
-        id: number
-        text: string
-        is_correct: boolean
-    }>
-    total: number
-    answered: number
-}
 
 export default {
     name: "QuizScreen",
     setup() {
         const telegramUserStore = useTelegramUserStore()
-        const currentQuestion = ref<Question | null>(null)
+        const questionData = ref<Question | null>(null)
         const selectedAnswerIndex = ref<number | null>(null)
         const isAnswered = ref(false)
         const total = ref(0)
         const answered = ref(0)
         const isFinished = ref(false)
 
+
         const progressPercent = computed((): number => {
             return total.value ? (answered.value / total.value) * 100 : 0
         })
 
-        const webAppStatus = computed((): string => {
-            if (window.Telegram?.WebApp) {
-                return "Подключен"
-            }
-            return "Не подключен"
-        })
-
-        const debugInfo = computed((): string => {
-            return debugData.value ? JSON.stringify(debugData.value, null, 2) : "Нет данных"
-        })
-
-        const fetchQuestion = async (): Promise<void> => {
+        const fetchQuestion = async () => {
             if (!telegramUserStore.isInitialized) {
-                telegramUserStore.initializeFromTelegram()
+                telegramUserStore.initializeFromTelegram();
             }
 
             const levelStore = useLevelStore();
-            const currentLevel = levelStore.currentLevel;
-
             const payload = {
                 user_id: telegramUserStore.user?.id,
-                level: currentLevel
-            }
+                level: levelStore.currentLevel
+            };
 
             try {
-                const response = await fetch(`${api_endpoint}/get_questions`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                })
-                if (!response.ok) {
-                    throw new Error("Ошибка загрузки вопроса")
-                }
-                const data = await response.json() as Question
-                if (data.answered >= data.total) {
-                    isFinished.value = true
-                    currentQuestion.value = null
-                } else {
-                    currentQuestion.value = data
-                    total.value = data.total
-                    answered.value = data.answered
-                    selectedAnswerIndex.value = null
-                    isAnswered.value = false
-                }
-            } catch (error) {
-                console.error("Ошибка:", error)
+                questionData.value = await post<Question>('/get_questions', payload);
+            } catch (err) {
+                console.error("Error:", err);
+            } finally {
             }
-        }
+        };
 
         const getAnswerClass = (index: number): string => {
             if (!isAnswered.value || !currentQuestion.value) return ""
@@ -109,27 +67,22 @@ export default {
         const { goBack }  = useNavigation();
 
         onMounted(() => {
-            window.Telegram?.WebApp?.ready()
-            telegramUserStore.initializeFromTelegram()
             fetchQuestion()
         })
 
         return {
-            currentQuestion,
+            questionData,
             selectedAnswerIndex,
             isAnswered,
             total,
             answered,
             isFinished,
             progressPercent,
-            webAppStatus,
-            debugInfo,
             fetchQuestion,
             getAnswerClass,
             selectAnswer,
             nextQuestion,
-            goBack,
-            telegramUserStore
+            goBack
         }
     }
 }

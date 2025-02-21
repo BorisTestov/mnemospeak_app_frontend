@@ -1,12 +1,12 @@
 import { useNavigation } from '@/navigation'
-import {levels} from '@/config.ts'
+import {LEVELS} from '@/config.ts'
 
 export default {
     setup() {
         const { goBack, chooseLevel }  = useNavigation();
 
         return {
-            levels,
+            levels: LEVELS,
             goBack,
             chooseLevel
         }

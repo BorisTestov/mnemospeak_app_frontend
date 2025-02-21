@@ -1,4 +1,4 @@
-<div class="quiz-screen">
+<div class="screen-wrapper">
     <div class="progress-container" v-if="total > 0">
         <div class="progress-bar">
             <div class="progress-fill" :style="{ width: progressPercent + '%' }"></div>
@@ -8,20 +8,20 @@
         </p>
     </div>
 
-    <!-- Контент квиза -->
-    <div class="quiz-card" v-if="currentQuestion">
-        <h2 class="question">{{ currentQuestion.question }}</h2>
-        <p class="question-translation">{{ currentQuestion.question_translated }}</p>
+    <div class="quiz-card" v-if="questionData">
+        <h2 class="question">{{ questionData.text }}</h2>
+<!--        <p class="question-translation">{{ currentQuestion.question_translated }}</p>-->
         <div class="answers">
             <button
-                    v-for="(option, index) in currentQuestion.options"
+                    v-for="(option, index) in questionData.options"
                     :key="index"
                     class="answer-btn"
                     :class="getAnswerClass(index)"
                     @click="selectAnswer(index)"
                     :disabled="isAnswered"
             >
-                {{ option.text }} ({{ option.text_translate }})
+<!--                {{ option.text }} ({{ option.text_translate }})-->
+                {{ option.text }}
             </button>
         </div>
     </div>
@@ -32,10 +32,5 @@
         <p v-else>Загрузка вопроса...</p>
     </div>
 
-    <!-- Нижняя панель с кнопками -->
-    <footer class="bottom-bar">
-        <div class="button-container">
-            <button class="back-btn" @click="goBack">Назад</button>
-        </div>
-    </footer>
+    <button class="back-btn" @click="goBack">Назад</button>
 </div>

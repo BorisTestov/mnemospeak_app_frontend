@@ -1,25 +1,10 @@
-/* Общий контейнер */
-.quiz-screen {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    background-color: #f9f9f9;
-    padding: 16px;
-    box-sizing: border-box;
+.loading {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 1.5rem;
+    text-shadow: var(--outline);
 }
 
-/* Отладочный блок */
-.debug {
-    background-color: #e0e0e0;
-    padding: 8px;
-    margin-bottom: 16px;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-/* Полоса прогресса */
 .progress-container {
     text-align: center;
     margin-bottom: 16px;
@@ -86,10 +71,6 @@
     transition: transform 0.2s, background-color 0.2s;
 }
 
-.answer-btn:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-}
 
 .answer-btn.correct {
     background-color: #a7e9af;
@@ -99,36 +80,20 @@
     background-color: #f4a9a8;
 }
 
-/* Нижняя панель */
-.bottom-bar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 500px;
-}
+/*!* Нижняя панель *!*/
+/*.bottom-bar {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    width: 100%;*/
+/*    max-width: 500px;*/
+/*}*/
 
-/* Контейнер кнопок */
-.button-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
+/*!*!* Контейнер кнопок *!*!*/
+/*!*.button-container {*!*/
+/*!*    display: flex;*!*/
+/*!*    flex-direction: column;*!*/
+/*!*    align-items: center;*!*/
+/*!*    gap: 16px;*!*/
+/*!*}*!*/
 
-/* Кнопка "Назад" */
-.back-btn {
-    background-color: #fce070;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    font-weight: bold;
-    font-size: 1rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, background-color 0.2s;
-}
-
-.back-btn:hover {
-    background-color: #fbe15a;
-    transform: scale(1.02);
-}
