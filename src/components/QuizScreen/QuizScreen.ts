@@ -3,6 +3,7 @@ import { useNavigation } from '@/navigation'
 
 import { useTelegramUserStore } from '@stores/TelegramUser'
 import { useLevelStore } from '@stores/LanguageLevel'
+import {api_endpoint} from "@/config.ts"
 
 interface Question {
     id: number
@@ -56,7 +57,7 @@ export default {
             }
 
             try {
-                const response = await fetch("https://stantion.ru.tuna.am/api/get_questions", {
+                const response = await fetch(`${api_endpoint}/get_questions`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
