@@ -1,14 +1,9 @@
-import { useLevelStore } from '@stores/LanguageLevel'
-import { useRouter } from 'vue-router'
+import { useNavigation } from '@/navigation'
 
 export default {
     name: "GrammarScreen",
     setup() {
-        const router = useRouter()
-
-        const goBack = () => {
-            router.go(-1)
-        }
+        const { goBack }  = useNavigation();
 
         return {
             grammarTopics: [

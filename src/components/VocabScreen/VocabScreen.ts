@@ -1,25 +1,9 @@
-import { useRouter } from 'vue-router'
+import { useNavigation } from '@/navigation'
 
 export default {
     name: "VocabScreen",
     setup() {
-        const router = useRouter()
-
-        const goBack = (): void => {
-            router.go(-1)
-        }
-
-        const goFlashcards = (): void => {
-            alert("Переходим к флеш-картам (пока заглушка)!")
-        }
-
-        const goTests = (): void => {
-            router.push({name: 'Quiz'})
-        }
-
-        const goStudyWords = (): void => {
-            alert("Переходим к изучению слов (пока заглушка)!")
-        }
+        const { goBack, goFlashcards, goTests, goStudyWords }  = useNavigation();
 
         return {
             goBack,

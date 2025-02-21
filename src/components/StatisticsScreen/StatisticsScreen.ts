@@ -1,16 +1,12 @@
-import { useRouter } from 'vue-router'
+import { useNavigation } from '@/navigation'
 
 export default {
     name: "VocabScreen",
     setup() {
-        const router = useRouter()
-
-        const goBack = (): void => {
-            router.go(-1)
-        }
+        const { goBack }  = useNavigation();
 
         return {
-            goBack
+            goBack,
         }
     }
 }

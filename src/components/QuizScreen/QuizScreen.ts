@@ -1,6 +1,8 @@
 import { ref, computed, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
+import { useNavigation } from '@/navigation'
+
 import { useTelegramUserStore } from '@stores/TelegramUser'
+import { useLevelStore } from '@stores/LanguageLevel'
 
 interface Question {
     id: number
@@ -17,7 +19,6 @@ interface Question {
 export default {
     name: "QuizScreen",
     setup() {
-        const router = useRouter()
         const telegramUserStore = useTelegramUserStore()
         const currentQuestion = ref<Question | null>(null)
         const selectedAnswerIndex = ref<number | null>(null)
@@ -42,14 +43,16 @@ export default {
         })
 
         const fetchQuestion = async (): Promise<void> => {
-            // Initialize Telegram user if not already done
             if (!telegramUserStore.isInitialized) {
                 telegramUserStore.initializeFromTelegram()
             }
 
+            const levelStore = useLevelStore();
+            const currentLevel = levelStore.currentLevel;
+
             const payload = {
                 user_id: telegramUserStore.user?.id,
-                level: "A1"
+                level: currentLevel
             }
 
             try {
@@ -102,9 +105,7 @@ export default {
             fetchQuestion()
         }
 
-        const goBack = (): void => {
-            router.go(-1)
-        }
+        const { goBack }  = useNavigation();
 
         onMounted(() => {
             window.Telegram?.WebApp?.ready()

@@ -1,18 +1,12 @@
-import { useRouter } from 'vue-router'
 import { useTelegramUserStore } from '@stores/TelegramUser'
+import { useNavigation } from '@/navigation'
+
 
 export default {
     name: "MainScreen",
     setup() {
-        const router = useRouter()
 
-        const goNext = (): void => {
-            router.push({ name: 'Level' })
-        }
-
-        const goStatistics = (): void => {
-            router.push({name: 'Statistics'})
-        }
+        const { goNext, goStatistics } = useNavigation();
 
         const store = useTelegramUserStore();
 
