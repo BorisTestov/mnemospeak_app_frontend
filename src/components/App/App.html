@@ -1,0 +1,23 @@
+<div class="app-container">
+    <template v-if="showSplash">
+        <SplashScreen
+                imagePath="/splash.png"
+                :duration="1000"
+                @splash-complete="showSplash = false"
+        />
+    </template>
+
+    <template v-else>
+        <img src="/header.png" alt="Header" class="header-image" />
+
+        <div class="main-content">
+            <router-view v-slot="{ Component }">
+                <transition name="fade" mode="out-in">
+                    <component :is="Component" />
+                </transition>
+            </router-view>
+        </div>
+
+        <img src="/footer.png" alt="Footer" class="footer-image" />
+    </template>
+</div>

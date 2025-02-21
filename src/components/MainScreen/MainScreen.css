@@ -18,8 +18,8 @@ h1 {
 
 .hero_image {
     border-radius: 50%;
-    width: calc(100vw / 3);
-    height: calc(100vw / 3);
+    width: min(calc(100vw / 3), 150px);
+    height: min(calc(100vw / 3), 150px);
 }
 
 .hero_image:hover {

@@ -1,12 +1,12 @@
 <div class="screen-wrapper">
 
     <h1 class="main_screen_header">Добро пожаловать{{username}}!</h1>
-    <a v-if="imageUrl"  href="#" @click="goStatistics" class="image-link">
-        <img
-                :src="imageUrl"
-                class="hero_image"
-        >
-    </a>
+    <img
+            v-if="imageUrl"
+            :src="imageUrl"
+            class="hero_image"
+            @click="goStatistics"
+    >
     <div class="button_block">
         <button v-if="userId" @click="goStatistics" class="statistics_button">Статистика</button>
         <button @click="goNext" class="continue_button">Начать обучение</button>

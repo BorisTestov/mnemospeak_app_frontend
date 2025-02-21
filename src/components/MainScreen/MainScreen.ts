@@ -10,6 +10,10 @@ export default {
             router.push({ name: 'Level' })
         }
 
+        const goStatistics = (): void => {
+            router.push({name: 'Statistics'})
+        }
+
         const store = useTelegramUserStore();
 
         if (!store.isInitialized) {
@@ -22,6 +26,7 @@ export default {
 
         return {
             goNext,
+            goStatistics,
             userId,
             username,
             imageUrl

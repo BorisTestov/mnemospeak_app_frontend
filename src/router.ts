@@ -6,6 +6,7 @@ import ModeScreen from '@components/ModeScreen/ModeScreen.vue'
 import GrammarScreen from '@components/GrammarScreen/GrammarScreen.vue'
 import VocabScreen from '@components/VocabScreen/VocabScreen.vue'
 import QuizScreen from "@components/QuizScreen/QuizScreen.vue";
+import StatisticsScreen from "@components/StatisticsScreen/StatisticsScreen.vue";
 
 const routes = [
     {path: '/', name: 'Home', component: MainScreen},
@@ -14,6 +15,7 @@ const routes = [
     {path: '/grammar', name: 'Grammar', component: GrammarScreen},
     {path: '/vocab', name: 'Vocab', component: VocabScreen},
     {path: '/quiz', name: 'Quiz', component: QuizScreen},
+    {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
 
 ]
 
