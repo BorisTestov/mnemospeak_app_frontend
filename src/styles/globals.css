@@ -37,6 +37,10 @@ a {
     font-family: inherit;
     font-size: inherit;
     line-height: inherit;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
 }
 
 em, i {
@@ -46,4 +50,3 @@ em, i {
 strong, b {
     font-weight: bold;
 }
-

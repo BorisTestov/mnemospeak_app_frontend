@@ -1,0 +1,7 @@
+<div class="splash-container" v-if="visible">
+    <transition name="fade-in" appear>
+        <div v-if="showContent" class="splash-screen">
+            <img :src="imagePath" alt="Splash Screen" class="splash-image" />
+        </div>
+    </transition>
+</div>

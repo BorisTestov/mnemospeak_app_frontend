@@ -1,4 +1,5 @@
 import { useRouter } from 'vue-router'
+import { useLevelStore } from '@stores/LanguageLevel'
 
 export default {
     name: "ModeScreen",
@@ -17,10 +18,15 @@ export default {
             router.push({ name: "Vocab" })
         }
 
+        const levelStore = useLevelStore();
+        const currentLevel = levelStore.currentLevel;
+
+
         return {
             goBack,
             goGrammar,
-            goVocab
+            goVocab,
+            currentLevel
         }
     }
 }

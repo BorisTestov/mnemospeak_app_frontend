@@ -1,27 +1,13 @@
-.screen-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between; /* Распределяет элементы по вертикали */
-    padding: 24px;
-    height: 100vh; /* Задаём высоту экрана для позиционирования */
-    box-sizing: border-box;
-}
-
-/* Заголовок */
-h2 {
-    margin-bottom: 2rem;
-}
-
-/* Круглые кнопки под уровни */
 .levels-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    flex-wrap: wrap;
+    max-height: 40vh;
+    margin-top: auto;
 }
 
-/* Кнопки уровней */
 .circle-btn {
     border-radius: 50%;
     width: 100px;
@@ -31,25 +17,3 @@ h2 {
     align-items: center;
     justify-content: center;
 }
-
-/* Кнопка "Назад" внизу */
-/*.back-btn {*/
-/*    background-color: var(--light-yellow);*/
-/*    border: none;*/
-/*    border-radius: 8px;*/
-/*    padding: 12px 24px;*/
-/*    font-size: 1rem;*/
-/*    font-weight: bold;*/
-/*    text-align: center;*/
-/*    margin-top: auto; !* Отправляет кнопку вниз *!*/
-/*    margin-bottom: 16px; !* Отступ от нижнего края *!*/
-/*    transition: transform 0.2s, background-color 0.2s;*/
-/*}*/
-/*.back-btn:hover {*/
-/*    cursor: pointer;*/
-/*    background-color: var(--yellow);*/
-/*    transform: scale(1.02);*/
-/*}*/
-/*.back-btn:active {*/
-/*    transform: scale(0.98);*/
-/*}*/

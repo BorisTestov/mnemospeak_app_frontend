@@ -1,4 +1,33 @@
 h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: 1.5rem;
+}
+
+.main_screen_header {
+    justify-self: center;
+    align-self: center;
+}
+
+.button_block {
+    margin-top:auto;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.hero_image {
+    border-radius: 50%;
+    width: calc(100vw / 3);
+    height: calc(100vw / 3);
+}
+
+.hero_image:hover {
+    cursor: pointer;
+    background-color: var(--yellow);
+    transform: scale(1.02);
+}
+
+.hero_image:active {
+    transform: scale(0.98);
 }

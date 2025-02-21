@@ -3,21 +3,31 @@ button {
     border: none;
     border-radius: 8px;
     padding: 12px 24px;
-    font-size: 1rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 800;
     text-align: center;
-    margin-top: auto; /* Отправляет кнопку вниз */
-    margin-bottom: 16px; /* Отступ от нижнего края */
     transition: transform 0.2s, background-color 0.2s;
-    max-width: var(--max-button-width)
+    width: min(var(--max-button-width), 100%);
 }
+
 button:hover {
     cursor: pointer;
     background-color: var(--yellow);
     transform: scale(1.02);
 }
+
 button:active {
     transform: scale(0.98);
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h1, h2 {
+    margin: 1rem;
+    text-shadow: var(--outline);
 }
 
 /* Общие стили приложения */
@@ -44,4 +54,11 @@ button:active {
     align-items: center;
     padding: 24px;
     margin: 0 auto;
+    min-height: 80vh;
+    gap: 20px;
 }
+
+.back-btn {
+    margin-top: auto;
+}
+
