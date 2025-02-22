@@ -14,7 +14,7 @@ export default {
             store.initializeFromTelegram()
         }
 
-        const username: string = store.fullName ? ', ' + store.fullName : '';
+        const username: string = store.fullName ? ', ' + store.fullName  : '';
         const imageUrl: string = store.user?.photo_url;
         const userId: number = store.user?.id;
 

@@ -9,3 +9,29 @@
     margin-bottom: auto;
 }
 
+
+@media (pointer: coarse) and (hover: none) and (orientation: landscape) {
+    .screen-wrapper {
+        display: grid;
+        grid-template-areas:
+        "header buttons";
+        grid-template-columns: 35% 65%;
+        justify-items: center;
+        align-items: center;
+    }
+
+    .header {
+        grid-area: header;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .vocab-modes {
+        grid-area: buttons;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+}

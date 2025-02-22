@@ -35,11 +35,13 @@ h1, h2 {
 
 .app-container {
     background-color: var(--background-color);
-    min-height: 100vh;
+    min-height: 100dvh;
     margin: 0;
     padding: 0;
     position: relative;
-    width: 100%;
+    width: 100dvw;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 .fade-enter-active,
@@ -59,24 +61,9 @@ h1, h2 {
     padding: 24px;
     margin: 0 auto;
     margin-top: 10px;
-    max-height: 70vh;
-    overflow: unset;
-    scrollbar-width: thin;
-    scrollbar-color: grey var(--sky-blue);
-    &::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-        background: var(--sky-blue);
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: grey;
-        border-radius: 4px;
-    }
-    gap: 20px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    /*max-height: 70vh;*/
 }
 
 .back-btn {
@@ -103,6 +90,36 @@ h1, h2 {
 .main-content {
     position: relative;
     z-index: 2;
-    padding: 10vh 20px;
-    min-height: 80vh;
+    padding: 10dvh 20px;
+    max-height: 80dvh;
+
+}
+
+.overflowed-container {
+    scrollbar-width: thin;
+    scrollbar-color: grey var(--sky-blue);
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--sky-blue);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: grey;
+        border-radius: 4px;
+    }
+    gap: 20px;
+    min-width: 100vw;
+    /*max-height: 60vh;*/
+    box-sizing: border-box;
+    overflow-y: auto;
+    margin: 0;
+    padding: 16px;
+    -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+    margin-bottom: 32px;
+    height: calc(100% - 32px);
+    align-self: stretch; /* Stretch to container */
 }

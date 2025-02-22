@@ -1,1 +1,28 @@
- /*TODO add statistics after backend integration*/
+@media (pointer: coarse) and (hover: none) and (orientation: landscape) {
+    .screen-wrapper {
+        height: 70dvh;
+        display: grid;
+        grid-template-areas: "header statistics";
+        grid-template-columns: 35% 65%;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header {
+        grid-area: header;
+        text-align: center;
+        align-self: center;
+    }
+
+    .statistics {
+        padding: 0;
+        margin: 0;
+        grid-area: statistics;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        flex-direction: column;
+        align-self: start;
+        padding-top: 32px;
+    }
+}
