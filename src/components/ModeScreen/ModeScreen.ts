@@ -1,5 +1,5 @@
 import { useLevelStore } from '@stores/LanguageLevel'
-import { useNavigation } from '@/navigation'
+import { useNavigation } from '@utils/navigation'
 
 
 export default {

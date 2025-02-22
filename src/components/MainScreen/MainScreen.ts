@@ -1,5 +1,5 @@
 import { useTelegramUserStore } from '@stores/TelegramUser'
-import { useNavigation } from '@/navigation'
+import { useNavigation } from '@utils/navigation'
 
 
 export default {

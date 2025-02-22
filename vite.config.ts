@@ -1,5 +1,3 @@
-import {fileURLToPath, URL} from 'node:url'
-
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -15,6 +13,7 @@ export default defineConfig({
             '@components': path.resolve(__dirname, 'src/components'),
             '@fonts': path.resolve(__dirname, 'src/fonts'),
             '@stores': path.resolve(__dirname,'src/stores'),
+            '@utils': path.resolve(__dirname,'src/utils'),
         },
     },
     server: {

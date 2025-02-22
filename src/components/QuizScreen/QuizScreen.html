@@ -10,7 +10,6 @@
 
     <div class="quiz-card" v-if="questionData">
         <h2 class="question">{{ questionData.text }}</h2>
-<!--        <p class="question-translation">{{ currentQuestion.question_translated }}</p>-->
         <div class="answers">
             <button
                     v-for="(option, index) in questionData.options"
@@ -20,16 +19,19 @@
                     @click="selectAnswer(index)"
                     :disabled="isAnswered"
             >
-<!--                {{ option.text }} ({{ option.text_translate }})-->
                 {{ option.text }}
             </button>
         </div>
     </div>
 
-    <!-- Если вопросов больше нет -->
+    <!-- Анимация загрузки с вращающимся изображением -->
     <div class="loading" v-else>
-        <p v-if="isFinished">Вы ответили на все вопросы!</p>
-        <p v-else>Загрузка вопроса...</p>
+        <div v-if="isFinished">
+            <p>Вы ответили на все вопросы!</p>
+        </div>
+        <div v-else class="rolling-animation-container">
+            <img src="/loader.png" class="rolling-image" alt="Загрузка..." />
+        </div>
     </div>
 
     <button class="back-btn" @click="goBack">Назад</button>

@@ -2,11 +2,13 @@ import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import { useTelegramUserStore } from '@stores/telegramUser';
+import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 
 export default defineComponent({
     name: "App",
     components: {
-        SplashScreen
+        SplashScreen,
+        ErrorToast
     },
     setup() {
         const route = useRoute();
@@ -14,6 +16,7 @@ export default defineComponent({
         const telegramStore = useTelegramUserStore();
         const showSplash = ref(false);
         const firstLoad = ref(true);
+        const errorToast = ref(null);
 
         const mainRoutePath = '/';
 
@@ -21,7 +24,7 @@ export default defineComponent({
             if (router.currentRoute.value.path !== mainRoutePath) {
                 router.back();
             } else {
-                Telegram.WebApp.close(); // Close the app if on main page
+                Telegram.WebApp.close();
             }
         };
 
@@ -39,13 +42,11 @@ export default defineComponent({
                 firstLoad.value = false;
             }
 
-            // Telegram Back Button
             if (window.Telegram?.WebApp) {
                 Telegram.WebApp.BackButton.show();
                 Telegram.WebApp.BackButton.onClick(handleBackButton);
             }
 
-            // Swipe Gesture Handling
             let touchStartX = 0;
             let touchEndX = 0;
 
@@ -86,7 +87,8 @@ export default defineComponent({
         };
 
         return {
-            showSplash
+            showSplash,
+            errorToast
         };
     }
 });

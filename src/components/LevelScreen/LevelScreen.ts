@@ -1,5 +1,5 @@
-import { useNavigation } from '@/navigation'
-import {LEVELS} from '@/config.ts'
+import { useNavigation } from '@utils/navigation'
+import {LEVELS} from '@utils/config.ts'
 
 export default {
     setup() {

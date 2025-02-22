@@ -28,6 +28,9 @@ h1 {
 h1, h2 {
     margin: 1rem;
     text-shadow: var(--outline);
+    /*font-family: "Myriad Pro", sans-serif;*/
+    /*color: black;*/
+    /*clip-path: inset(0 -1px -1px -1px);*/
 }
 
 .app-container {

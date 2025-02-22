@@ -7,6 +7,12 @@
     --dark-blue: #173f8e;
     --background-color: #fff4dc;
     --max-button-width: 300px;
-    --outline: -1px -1px 0 white, 1px -1px 0 white, 1px 1px 0 white,
-    1px 1px 0 white;
+    --outline: -1px -1px 0 var(--background-color),  1px -1px 0 var(--background-color),
+    -1px  1px 0 var(--background-color),  1px  1px 0 var(--background-color),
+    0px  -1px 0 var(--background-color),  0px  1px 0 var(--background-color),
+    -1px  0px 0 var(--background-color),  1px  0px 0 var(--background-color),
+    -1px -2px 0 var(--background-color),  1px -2px 0 var(--background-color),
+    -1px  2px 0 var(--background-color),  1px  2px 0 var(--background-color),
+    -2px -1px 0 var(--background-color),  2px -1px 0 var(--background-color),
+    -2px  1px 0 var(--background-color),  2px  1px 0 var(--background-color);
 }

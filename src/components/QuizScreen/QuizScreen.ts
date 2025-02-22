@@ -1,9 +1,9 @@
 import { ref, computed, onMounted } from 'vue'
-import { useNavigation } from '@/navigation'
-import { post } from '@/api';
+import { useNavigation } from '@utils/navigation'
+import { post } from '@utils/api';
 import { useTelegramUserStore } from '@stores/TelegramUser'
 import { useLevelStore } from '@stores/LanguageLevel'
-import { Question } from '@/api_models'
+import { Question } from '@utils/api_models'
 
 
 export default {
