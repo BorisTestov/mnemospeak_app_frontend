@@ -18,6 +18,9 @@
 .overflowed-container {
     align-items: center;
     min-width: 1dvh;
+    max-height: 60dvh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
 }
 
