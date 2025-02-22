@@ -1,0 +1,18 @@
+<div v-if="isVisible" class="modal-overlay" @click="closeModal">
+    <div class="modal-container" @click.stop>
+        <button class="close-button" @click="closeModal">
+            <i class="fas fa-times"></i>
+        </button>
+
+        <div class="modal-content">
+            <div class="toggle-container">
+                <span class="toggle-label">Показывать перевод</span>
+                <span class="toggle-text">{{ showTranslation ? 'ON' : 'OFF' }}</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" v-model="showTranslation" @change="handleTranslationToggle">
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>

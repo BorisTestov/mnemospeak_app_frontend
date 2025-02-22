@@ -1,6 +1,7 @@
 <div class="screen-wrapper">
     <h2>Темы по грамматике</h2>
 
+    <div class="container">
     <button v-for="topic in grammarTopics" :key="topic" class="topic-btn">{{topic}}</button>
-    <button class="back-btn" @click="goBack">Назад</button>
+    </div>
 </div>

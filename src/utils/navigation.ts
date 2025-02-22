@@ -9,6 +9,10 @@ export function useNavigation() {
             router.back()
         },
 
+        goHome: (): void => {
+            router.push({ name: 'Home' })
+        },
+
         goFlashcards: (): void => {
             alert("Переходим к флеш-картам (пока заглушка)!")
         },

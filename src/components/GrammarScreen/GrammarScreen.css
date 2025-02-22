@@ -1,7 +1,14 @@
-button:nth-last-of-type(2) {
-    margin-bottom: 50px;
-}
+/*button:nth-last-of-type(2) {*/
+/*    margin-bottom: 50px;*/
+/*}*/
 
-button:first-of-type {
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     margin-top: auto;
+    margin-bottom: auto;
 }

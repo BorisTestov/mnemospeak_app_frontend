@@ -1,14 +1,17 @@
-import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
+import { defineComponent, ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
+import { useNavigation } from '@utils/navigation'
 import { useTelegramUserStore } from '@stores/telegramUser';
+import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
+import Modal from '@components/SettingsModal/SettingsModal.vue';
 
 export default defineComponent({
     name: "App",
     components: {
         SplashScreen,
-        ErrorToast
+        ErrorToast,
+        Modal
     },
     setup() {
         const route = useRoute();
@@ -17,8 +20,9 @@ export default defineComponent({
         const showSplash = ref(false);
         const firstLoad = ref(true);
         const errorToast = ref(null);
-
         const mainRoutePath = '/';
+        const showModal = ref(false);
+
 
         const handleBackButton = () => {
             if (router.currentRoute.value.path !== mainRoutePath) {
@@ -86,9 +90,29 @@ export default defineComponent({
             return false;
         };
 
+        const isMainPage = computed(() => {
+            return route.path === mainRoutePath;
+        });
+
+        const { goBack, goHome }  = useNavigation();
+
+        const openModal = () => {
+            showModal.value = true;
+        };
+
+        const closeModal = () => {
+            showModal.value = false;
+        };
+
         return {
             showSplash,
-            errorToast
+            errorToast,
+            goBack,
+            goHome,
+            isMainPage,
+            showModal,
+            openModal,
+            closeModal
         };
     }
 });
