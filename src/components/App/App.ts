@@ -1,7 +1,7 @@
 import { defineComponent, ref, onMounted, onUnmounted, watch, computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useNavigation } from '@utils/navigation'
-import { useTelegramUserStore } from '@stores/telegramUser';
+import { useTelegramUserStore } from '@stores/TelegramUser';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';

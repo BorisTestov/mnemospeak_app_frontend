@@ -16,7 +16,6 @@ const routes = [
     {path: '/vocab', name: 'Vocab', component: VocabScreen},
     {path: '/quiz', name: 'Quiz', component: QuizScreen},
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
-
 ]
 
 const router = createRouter({

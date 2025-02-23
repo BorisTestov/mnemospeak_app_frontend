@@ -4,7 +4,6 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "tunnel": "ngrok http --domain=emerging-wren-engaging.ngrok-free.app 5173 || exit /b 0",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"

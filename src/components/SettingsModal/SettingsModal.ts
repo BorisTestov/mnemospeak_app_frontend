@@ -1,5 +1,5 @@
 import { defineComponent, ref, watch, onMounted } from 'vue';
-import { useUserSettingsStore } from '@stores/userSettings'
+import { useUserSettingsStore } from '@stores/UserSettings'
 
 
 export default defineComponent({
