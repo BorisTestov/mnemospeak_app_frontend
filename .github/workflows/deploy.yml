@@ -42,7 +42,6 @@ jobs:
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
           ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST '
-#            echo '"'"'${{ secrets.ENV_FILE }}'"'"' > '"$DEPLOY_PATH"'/.env
 
             docker compose -f '"$DEPLOY_PATH"'/compose.yml up -d --build --force-recreate
           '
