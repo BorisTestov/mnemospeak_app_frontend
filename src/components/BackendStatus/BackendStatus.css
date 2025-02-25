@@ -1,0 +1,20 @@
+.backend-status {
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 4px;
+    z-index: 1000;
+    position: fixed;
+
+    top: 0;
+    left: calc(50dvw - 1rem);
+}
+
+.online {
+    color: white;
+    background-color: #4caf50; /* Green */
+}
+
+.offline {
+    color: white;
+    background-color: #f44336; /* Red */
+}

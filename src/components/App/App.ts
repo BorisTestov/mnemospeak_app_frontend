@@ -5,7 +5,6 @@ import { useTelegramUserStore } from '@stores/TelegramUser';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';
-import BackendStatus from '@components/BackendStatus/BackendStatus.vue';
 
 
 export default defineComponent({
@@ -14,7 +13,6 @@ export default defineComponent({
         SplashScreen,
         ErrorToast,
         Modal,
-        BackendStatus
     },
     setup() {
         const route = useRoute();
@@ -121,8 +119,8 @@ export default defineComponent({
                 Telegram.WebApp.BackButton.hide();
                 Telegram.WebApp.BackButton.offClick(handleBackButton);
             }
-            document.removeEventListener("touchstart", onTouchStart);
-            document.removeEventListener("touchend", onTouchEnd);
+            // document.removeEventListener("touchstart", onTouchStart);
+            // document.removeEventListener("touchend", onTouchEnd);
             window.removeEventListener('orientationchange', handleOrientationChange);
         });
 
