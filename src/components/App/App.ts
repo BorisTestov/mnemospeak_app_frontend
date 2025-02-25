@@ -5,13 +5,16 @@ import { useTelegramUserStore } from '@stores/TelegramUser';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';
+import BackendStatus from '@components/BackendStatus/BackendStatus.vue';
+
 
 export default defineComponent({
     name: "App",
     components: {
         SplashScreen,
         ErrorToast,
-        Modal
+        Modal,
+        BackendStatus
     },
     setup() {
         const route = useRoute();
@@ -61,9 +64,9 @@ export default defineComponent({
             }, 100);
         };
 
-        const handleSwipeBack = (touchStartX: number, touchStartY: number, touchEndX: number, touchEndY: number) => {
-            const angle = window.screen.orientation?.angle || window.orientation || 0;
-            const isLandscape = angle === 90 || angle === -90;
+        // const handleSwipeBack = (touchStartX: number, touchStartY: number, touchEndX: number, touchEndY: number) => {
+        //     const angle = window.screen.orientation?.angle || window.orientation || 0;
+        //     const isLandscape = angle === 90 || angle === -90;
 
             // if (isLandscape) {
             //     if (touchEndY < touchStartY - 50) {
@@ -74,7 +77,7 @@ export default defineComponent({
             //         handleBackButton();
             //     }
             // }
-        };
+        // };
 
         onMounted(() => {
             const isTelegramUser = telegramStore.initializeFromTelegram();
@@ -84,29 +87,29 @@ export default defineComponent({
                 firstLoad.value = false;
             }
 
-            if (window.Telegram?.WebApp) {
-                Telegram.WebApp.BackButton.show();
-                Telegram.WebApp.BackButton.onClick(handleBackButton);
-            }
+            // if (window.Telegram?.WebApp) {
+            //     Telegram.WebApp.BackButton.show();
+            //     Telegram.WebApp.BackButton.onClick(handleBackButton);
+            // }
 
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchEndX = 0;
-            let touchEndY = 0;
-
-            const onTouchStart = (e: TouchEvent) => {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            };
-
-            const onTouchEnd = (e: TouchEvent) => {
-                touchEndX = e.changedTouches[0].clientX;
-                touchEndY = e.changedTouches[0].clientY;
-                handleSwipeBack(touchStartX, touchStartY, touchEndX, touchEndY);
-            };
-
-            document.addEventListener("touchstart", onTouchStart);
-            document.addEventListener("touchend", onTouchEnd);
+            // let touchStartX = 0;
+            // let touchStartY = 0;
+            // let touchEndX = 0;
+            // let touchEndY = 0;
+            //
+            // const onTouchStart = (e: TouchEvent) => {
+            //     touchStartX = e.touches[0].clientX;
+            //     touchStartY = e.touches[0].clientY;
+            // };
+            //
+            // const onTouchEnd = (e: TouchEvent) => {
+            //     touchEndX = e.changedTouches[0].clientX;
+            //     touchEndY = e.changedTouches[0].clientY;
+            //     handleSwipeBack(touchStartX, touchStartY, touchEndX, touchEndY);
+            // };
+            //
+            // document.addEventListener("touchstart", onTouchStart);
+            // document.addEventListener("touchend", onTouchEnd);
             window.addEventListener('orientationchange', handleOrientationChange);
 
 

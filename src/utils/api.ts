@@ -1,7 +1,7 @@
 type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE';
 
-import { API_ENDPOINT } from "@utils/config";
 import errorNotification from "@utils/errorNotification";
+import {API_ENDPOINT} from "@utils/config";
 
 interface FetchOptions {
     method?: HttpMethod;
