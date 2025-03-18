@@ -1,5 +1,5 @@
 import { defineComponent, ref, onMounted, onUnmounted } from 'vue';
-import { get } from '@utils/api';
+import {backend_healthcheck} from "../../utils/api_calls";
 
 export default defineComponent({
     name: 'BackendStatus',
@@ -8,11 +8,8 @@ export default defineComponent({
         const checkInterval = ref<number | null>(null);
 
         const checkBackendStatus = async () => {
-            console.log(import.meta.env.VITE_API_URL);
             try {
-                // Use your utility function instead of direct fetch
-                // Note: We make a simple GET request to healthcheck endpoint and disable error notifications
-                await get('/healthcheck', {}, false);
+                await backend_healthcheck();
                 isOnline.value = true;
             } catch (error) {
                 isOnline.value = false;

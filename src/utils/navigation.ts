@@ -13,10 +13,6 @@ export function useNavigation() {
             router.push({ name: 'Home' })
         },
 
-        goFlashcards: (): void => {
-            alert("Переходим к флеш-картам (пока заглушка)!")
-        },
-
         goTests: (): void => {
             router.push({name: 'Quiz'})
         },
@@ -39,6 +35,10 @@ export function useNavigation() {
 
         goStatistics: (): void => {
             router.push({name: 'Statistics'})
+        },
+
+        goFlashcards: (): void => {
+            router.push({ name: 'Flashcards' })
         },
 
         chooseLevel: (level: string): void => {
