@@ -26,7 +26,6 @@ export default {
                 cards.value = await get_all_words()
                 currentIndex.value = 0
                 cards.value = shuffleCards(cards.value)
-                console.log("Flashcards fetched successfully:", cards.value)
             } catch (err) {
                 console.error("Error fetching flashcards:", err)
             } finally {

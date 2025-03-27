@@ -41,6 +41,14 @@ export function useNavigation() {
             router.push({ name: 'Flashcards' })
         },
 
+        goNouns: (): void => {
+            router.push({ name: 'Nouns' })
+        },
+
+        goNounsCases: (): void => {
+            router.push({ name: 'NounsCases' })
+        },
+
         chooseLevel: (level: string): void => {
             const levelStore = useLevelStore()
             levelStore.setLevel(level)

@@ -3,7 +3,7 @@ import { useNavigation } from '@utils/navigation'
 export default {
     name: "GrammarScreen",
     setup() {
-        const { goBack, goNouns }  = useNavigation();
+        const { goBack, goNounsCases }  = useNavigation();
 
         return {
             // grammarTopics: [
@@ -13,7 +13,7 @@ export default {
             // grammarTopics: [
             //     "Существительные",
             // ],
-            goNouns,
+            goNounsCases,
             goBack
         }
     }
