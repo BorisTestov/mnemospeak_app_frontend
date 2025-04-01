@@ -43,7 +43,7 @@ export default defineComponent({
                 const lesson_id = data.lesson_id;
                 const id = data.id;
                 console.log(filePath);
-                const response = await fetchData(`/lessons/${lesson_id}/parts/${id}/content`, {method: 'GET', null, true}, false);
+                const response = await fetchData(`/lessons/${lesson_id}/parts/${id}/content`, {method: 'GET'}, false);
                 console.log(response);
                 currentContent.value = response.data;
                 currentIndex.value = index;
