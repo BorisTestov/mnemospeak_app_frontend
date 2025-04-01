@@ -45,7 +45,7 @@ export default defineComponent({
                 console.log(filePath);
                 const response = await fetchData(`/lessons/${lesson_id}/parts/${id}/content`, {method: 'GET'}, false);
                 console.log(response);
-                currentContent.value = response.data;
+                currentContent.value = response;
                 currentIndex.value = index;
             } catch (error: any) {
                 console.error('Error loading content:', error);
