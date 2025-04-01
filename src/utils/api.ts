@@ -61,7 +61,7 @@ export const fetchData = async <T>(
             return await response.json() as T;
         }
         catch (error) {
-            return await response.text();
+            return await response.text() as T;
         }
     } catch (error) {
         console.error('Fetch error:', error);
