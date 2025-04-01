@@ -12,7 +12,8 @@ interface FetchOptions {
 
 export const fetchData = async <T>(
     endpoint: string,
-    options: FetchOptions = {}
+    options: FetchOptions = {},
+    prefix: str = '/api/v1'
 ): Promise<T> => {
     const {
         method = 'GET',
@@ -34,9 +35,10 @@ export const fetchData = async <T>(
     }
 
     try {
-        const response = await fetch(`${API_ENDPOINT}${endpoint}`, requestOptions);
+        console.log(`${API_ENDPOINT}${prefix}${endpoint}`);
+        const response = await fetch(`${API_ENDPOINT}${prefix}${endpoint}`, requestOptions);
 
-        if (!response.ok) {
+        if (response.status >= 400 && response.status < 600) {
             const errorText = `Error: ${response.status} ${response.statusText}`;
             console.error(errorText);
 
@@ -70,9 +72,10 @@ export const fetchData = async <T>(
 export const get = <T>(
     endpoint: string,
     headers?: Record<string, string>,
-    showErrorNotification = true
+    showErrorNotification = true,
+    prefix: str = '/api/v1'
 ): Promise<T> => {
-    return fetchData<T>(endpoint, { method: 'GET', headers, showErrorNotification });
+    return fetchData<T>(endpoint, { method: 'GET', headers, showErrorNotification }, prefix);
 };
 
 export const post = <T>(

@@ -1,5 +1,5 @@
-import { defineComponent, ref, onMounted, PropType } from 'vue';
-import axios from 'axios';
+import {defineComponent, ref, onMounted, PropType, onActivated} from 'vue';
+import {fetchData, get} from "@utils/api";
 
 export default defineComponent({
     name: "HTMLLoader",
@@ -9,12 +9,12 @@ export default defineComponent({
             default: ''
         },
         files: {
-            type: Array as PropType<string[]>,
+            type: Array as PropType<Object[]>,
             required: true
         },
         basePath: {
             type: String,
-            default: '/data/'
+            default: '/lessons/'
         },
         initialIndex: {
             type: Number,
@@ -23,11 +23,13 @@ export default defineComponent({
         }
     },
     setup(props) {
+        console.log("setup");
         const currentIndex = ref<number>(props.initialIndex);
         const currentContent = ref<string>('');
         const loading = ref<boolean>(false);
 
         const loadContent = async (index: number): Promise<void> => {
+            console.log("1");
             if (index < 0 || index >= props.files.length) {
                 console.error('Invalid file index:', index);
                 return;
@@ -36,10 +38,13 @@ export default defineComponent({
             loading.value = true;
             try {
                 // Build the full path to the file
+                const data = props.files[index];
                 const filePath = `${props.basePath}${props.files[index]}`;
-
-                // Use axios to fetch the file
-                const response = await axios.get(filePath);
+                const lesson_id = data.lesson_id;
+                const id = data.id;
+                console.log(filePath);
+                const response = await get(`/lessons/${lesson_id}/parts/${id}/content`, { responseType: 'text' });
+                console.log(response);
                 currentContent.value = response.data;
                 currentIndex.value = index;
             } catch (error: any) {
@@ -63,10 +68,14 @@ export default defineComponent({
         };
 
         onMounted(() => {
-            // Load the initial HTML file
+            console.log("HTMLLoader Mounted: Loading initial content");
             loadContent(props.initialIndex);
         });
 
+        onActivated(() => {
+            console.log("HTMLLoader Activated: Reloading content");
+            loadContent(props.initialIndex);
+        });
         return {
             currentIndex,
             currentContent,

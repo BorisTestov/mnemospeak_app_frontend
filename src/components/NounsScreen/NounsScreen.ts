@@ -1,7 +1,7 @@
 import { useNavigation } from '@utils/navigation'
 
 export default {
-    name: "GrammarScreen",
+    name: "NounsScreen",
     setup() {
         const { goBack, goNounsCases }  = useNavigation();
 

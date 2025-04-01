@@ -1,7 +1,7 @@
 import { useNavigation } from '@utils/navigation'
 
 export default {
-    name: "VocabScreen",
+    name: "StatisticsScreen",
     setup() {
         const { goBack }  = useNavigation();
 
