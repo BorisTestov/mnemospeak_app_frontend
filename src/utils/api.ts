@@ -64,7 +64,6 @@ export const fetchData = async <T>(
         else {
             return await response.text();
         }
-        }
     } catch (error) {
         console.error('Fetch error:', error);
 
