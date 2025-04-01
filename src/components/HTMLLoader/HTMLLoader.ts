@@ -1,5 +1,5 @@
 import {defineComponent, ref, onMounted, PropType, onActivated} from 'vue';
-import {fetchData, get} from "@utils/api";
+import {fetchData} from "@utils/api";
 
 export default defineComponent({
     name: "HTMLLoader",
@@ -43,7 +43,7 @@ export default defineComponent({
                 const lesson_id = data.lesson_id;
                 const id = data.id;
                 console.log(filePath);
-                const response = await get(`/lessons/${lesson_id}/parts/${id}/content`, { responseType: 'text' });
+                const response = await fetchData(`/lessons/${lesson_id}/parts/${id}/content`, {method: 'GET', null, true}, false);
                 console.log(response);
                 currentContent.value = response.data;
                 currentIndex.value = index;

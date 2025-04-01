@@ -13,6 +13,7 @@ interface FetchOptions {
 export const fetchData = async <T>(
     endpoint: string,
     options: FetchOptions = {},
+    isJson: boolean = true,
     prefix: str = '/api/v1'
 ): Promise<T> => {
     const {
@@ -57,11 +58,12 @@ export const fetchData = async <T>(
             throw new Error(errorText);
         }
 
-        try {
+        if (isJson) {
             return await response.json() as T;
         }
-        catch (error) {
-            return await response.text() as T;
+        else {
+            return await response.text();
+        }
         }
     } catch (error) {
         console.error('Fetch error:', error);
