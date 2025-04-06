@@ -5,6 +5,7 @@ import { useTelegramUserStore } from '@stores/TelegramUser';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';
+import HealthCheckWrapper from '@components/HealthCheckWrapper.vue';
 
 
 export default defineComponent({
@@ -13,6 +14,7 @@ export default defineComponent({
         SplashScreen,
         ErrorToast,
         Modal,
+        HealthCheckWrapper
     },
     setup() {
         const route = useRoute();
