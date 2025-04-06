@@ -22,9 +22,10 @@ export const checkHealth = async (): Promise<boolean> => {
             false
         );
         console.log("STATUS");
-        console.logs(response.status);
+        console.log(response.status);
+        console.log(response.status === 'OK');
         // Return true if status is "ok" or whatever indicates healthy status in your API
-        return response.status === 'ok';
+        return response.status === 'OK';
     } catch (error) {
         console.error('Health check failed:', error);
         return false;

@@ -14,7 +14,7 @@ export const fetchData = async <T>(
     endpoint: string,
     options: FetchOptions = {},
     isJson: boolean = true,
-    prefix: str = '/api/v1'
+    prefix: string = '/api/v1'
 ): Promise<T> => {
     const {
         method = 'GET',

@@ -3,10 +3,6 @@
     <main>
       <div class="container">
         <div class="error-card">
-          <div class="error-header">
-            <h1>Технические работы</h1>
-          </div>
-
           <div class="error-body">
             <div class="error-icon">⚙️</div>
             <p class="error-message">Ведутся технические работы, попробуйте позже.</p>
@@ -18,7 +14,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 :root {
   /* Primary Colors - Blues */
   --primary-color: #173f8e;
@@ -117,6 +113,7 @@ main {
 .error-body {
   padding: var(--spacing-xl);
   text-align: center;
+  background-color: var(--primary-color);
 }
 
 .error-icon {
