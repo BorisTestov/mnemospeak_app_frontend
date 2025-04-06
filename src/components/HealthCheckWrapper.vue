@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue';
+import {defineComponent, ref, onMounted, onActivated} from 'vue';
 import { getHealthStatus } from '@/services/healthCheckService';
 import MaintenancePage from './MaintenancePage.vue';
 
@@ -24,6 +24,10 @@ export default defineComponent({
     };
 
     onMounted(() => {
+      checkHealth();
+    });
+
+    onActivated(() => {
       checkHealth();
     });
 
