@@ -19,8 +19,7 @@ export const checkHealth = async (): Promise<boolean> => {
         const response = await get<HealthCheckResponse>(
             '/healthcheck',
             {},
-            false, // Don't show error notification on failure
-            '' // No prefix as we're using the full path
+            false
         );
 
         // Return true if status is "ok" or whatever indicates healthy status in your API
