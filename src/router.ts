@@ -11,7 +11,7 @@ import FlashcardScreen from "@components/FlashcardScreen/FlashcardScreen.vue";
 import NounsScreen from "@components/NounsScreen/NounsScreen.vue";
 import LessonScreen from "@components/Lessons/Lessons.vue";
 import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
-// import Cases from "@/lessons/Nouns/Cases.vue";
+import TopicScreen from '@/components/TopicScreen.vue'
 
 const routes = [
     {path: '/', name: 'Home', component: MainScreen},
@@ -22,7 +22,7 @@ const routes = [
     {path: '/quiz', name: 'Quiz', component: QuizScreen},
     {path: '/flashcards', name: 'Flashcards', component: FlashcardScreen},
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
-    {path: '/nouns', name: 'Nouns', component: NounsScreen},
+    {path: '/topic/:topicId', name: 'Topic', component: TopicScreen},
     {path: '/lesson', name: 'Lesson', component: LessonScreen},
     {path: '/lessontests', name: 'LessonTests', component: LessonTests}
 ]

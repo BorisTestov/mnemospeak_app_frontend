@@ -59,6 +59,10 @@ export function useNavigation() {
             router.push({name: 'LessonTests'})
         },
 
+        goTopic: (topicId: string) => {
+            router.push({ name: 'Topic', params: { topicId } })
+        },
+
         chooseLevel: (level: string): void => {
             const levelStore = useLevelStore()
             levelStore.setLevel(level)
