@@ -6,16 +6,18 @@
         v-else
         :title="lessonTitle"
         :files="lessonFiles"
+        :has-tests="hasTests"
         @error="handleLoaderError"
     />
   </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, onMounted, onActivated} from 'vue';
+import {defineComponent, ref, onMounted, onActivated, computed} from 'vue';
 import { useNavigation } from '@utils/navigation';
 import HTMLLoader from '@components/HTMLLoader/HTMLLoader.vue';
 import { get } from '@utils/api';
+import {useLessonStore} from "@stores/LessonSettings";
 
 export default defineComponent({
   name: "LessonScreen",
@@ -23,20 +25,21 @@ export default defineComponent({
     HTMLLoader
   },
   setup() {
-    const { goBack } = useNavigation();
-
-    const lessonId = 1
     const lessonTitle = ref('');
     const lessonFiles = ref<string[]>([]);
     const loading = ref(true);
     const error = ref('');
 
+    const lessonStore = useLessonStore()
+    const hasTests = computed(() => lessonStore.has_tests)
+    const lessonId = computed(() => lessonStore.lesson_id)
+
+
+
     const handleLoaderError = (err) => {
       console.error('HTMLLoader error:', err);
       error.value = `Error loading content: ${err}`;
     };
-
-    console.log(2);
 
     onMounted(async () => {
       try {
@@ -46,8 +49,8 @@ export default defineComponent({
         let parts = [];
 
         try {
-          console.log(`Fetching lesson parts for ID: ${lessonId}`);
-          const data = await get(`/lessons/${lessonId}/parts`);
+          console.log(`Fetching lesson parts for ID: ${lessonId.value}`);
+          const data = await get(`/lessons/${lessonId.value}/parts`);
           console.log('API Response:', data);
 
           if (data && Array.isArray(data)) {
@@ -84,8 +87,6 @@ export default defineComponent({
               file_path: part.file_path
             }));
 
-        console.log('Lesson files:', filePaths);
-
         if (filePaths.length === 0) {
           error.value = 'No valid files found for this lesson';
         } else {
@@ -100,18 +101,25 @@ export default defineComponent({
     });
 
     return {
-      goBack,
       lessonTitle,
       lessonFiles,
       loading,
       error,
-      handleLoaderError
+      handleLoaderError,
+      hasTests
     };
   }
 });
 </script>
 
 <style scoped>
+.tests_button {
+  max-width: 30%;
+  position: absolute;
+  top: 88dvh;
+  font-size: 1rem;
+}
+
 .screen-wrapper {
   width: 100%;
   height: 100%;

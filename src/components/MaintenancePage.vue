@@ -2,11 +2,11 @@
   <div class="content-wrapper">
     <main>
       <div class="container">
-        <div class="error-card">
+        <div class="error-card" style="background-color: #4c6aa6; border-radius: 10px">
           <div class="error-body">
             <div class="error-icon">⚙️</div>
-            <p class="error-message">Ведутся технические работы, попробуйте позже.</p>
-            <p>Приносим извинения за временные неудобства.</p>
+            <p class="error-message" style="color: white;">Ведутся технические работы, попробуйте позже.</p>
+            <p style="color: white;">Приносим извинения за временные неудобства.</p>
           </div>
         </div>
       </div>

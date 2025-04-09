@@ -1,8 +1,10 @@
 import { useRouter } from 'vue-router'
 import { useLevelStore } from '@stores/LanguageLevel'
+import { useLessonStore } from '@stores/LessonSettings'
 
 export function useNavigation() {
     const router = useRouter()
+    const lessonStore = useLessonStore()
 
     return {
         goBack: (): void => {
@@ -45,8 +47,16 @@ export function useNavigation() {
             router.push({ name: 'Nouns' })
         },
 
-        goNounsCases: (): void => {
-            router.push({ name: 'NounsCases' })
+        goLesson: (lessonId: Number, hasTests: Boolean = false): void => {
+            lessonStore.setLessonProps({
+                lesson_id: Number(lessonId),
+                has_tests: Boolean(hasTests)
+            })
+            router.push({name: 'Lesson'})
+        },
+
+        goLessonTests: (lessonId: Number): void => {
+            router.push({name: 'LessonTests'})
         },
 
         chooseLevel: (level: string): void => {

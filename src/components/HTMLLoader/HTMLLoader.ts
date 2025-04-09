@@ -1,5 +1,6 @@
 import {defineComponent, ref, onMounted, PropType, onActivated} from 'vue';
 import {fetchData} from "@utils/api";
+import {useNavigation} from "../../utils/navigation";
 
 export default defineComponent({
     name: "HTMLLoader",
@@ -20,6 +21,10 @@ export default defineComponent({
             type: Number,
             default: 0,
             validator: (value: number) => value >= 0
+        },
+        hasTests: {
+            type: Boolean,
+            default: false
         }
     },
     setup(props) {
@@ -27,6 +32,8 @@ export default defineComponent({
         const currentIndex = ref<number>(props.initialIndex);
         const currentContent = ref<string>('');
         const loading = ref<boolean>(false);
+        const { goLessonTests } = useNavigation();
+        const hasTests = ref<boolean>(props.hasTests);
 
         const loadContent = async (index: number): Promise<void> => {
             console.log("1");
@@ -77,11 +84,13 @@ export default defineComponent({
             loadContent(props.initialIndex);
         });
         return {
+            goLessonTests,
             currentIndex,
             currentContent,
             loading,
             loadPrevious,
-            loadNext
+            loadNext,
+            hasTests
         };
     }
 });

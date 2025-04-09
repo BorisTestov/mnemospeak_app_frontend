@@ -9,7 +9,8 @@ import QuizScreen from "@components/QuizScreen/QuizScreen.vue";
 import StatisticsScreen from "@components/StatisticsScreen/StatisticsScreen.vue";
 import FlashcardScreen from "@components/FlashcardScreen/FlashcardScreen.vue";
 import NounsScreen from "@components/NounsScreen/NounsScreen.vue";
-import Cases from "@components/Lessons/Nouns/Cases.vue";
+import LessonScreen from "@components/Lessons/Lessons.vue";
+import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
 // import Cases from "@/lessons/Nouns/Cases.vue";
 
 const routes = [
@@ -22,8 +23,8 @@ const routes = [
     {path: '/flashcards', name: 'Flashcards', component: FlashcardScreen},
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
     {path: '/nouns', name: 'Nouns', component: NounsScreen},
-
-    {path: '/nounscases', name: 'NounsCases', component: Cases},
+    {path: '/lesson', name: 'Lesson', component: LessonScreen},
+    {path: '/lessontests', name: 'LessonTests', component: LessonTests}
 ]
 
 const router = createRouter({
