@@ -22,7 +22,8 @@
 }
 
 .home-button {
-    right: 80px;
+    /*right: 80px;*/
+    right: 20px;
 }
 
 .settings-button {

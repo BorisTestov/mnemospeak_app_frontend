@@ -8,9 +8,9 @@ import VocabScreen from '@components/VocabScreen/VocabScreen.vue'
 import QuizScreen from "@components/QuizScreen/QuizScreen.vue";
 import StatisticsScreen from "@components/StatisticsScreen/StatisticsScreen.vue";
 import FlashcardScreen from "@components/FlashcardScreen/FlashcardScreen.vue";
-import NounsScreen from "@components/NounsScreen/NounsScreen.vue";
 import LessonScreen from "@components/Lessons/Lessons.vue";
 import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
+import Test from "@components/TestScreen/TestScreen.vue";
 import TopicScreen from '@/components/TopicScreen.vue'
 
 const routes = [
@@ -24,7 +24,8 @@ const routes = [
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
     {path: '/topic/:topicId', name: 'Topic', component: TopicScreen},
     {path: '/lesson', name: 'Lesson', component: LessonScreen},
-    {path: '/lessontests', name: 'LessonTests', component: LessonTests}
+    {path: '/lessontests', name: 'LessonTests', component: LessonTests},
+    {path: '/test', name: 'Test', component: Test},
 ]
 
 const router = createRouter({
