@@ -1,15 +1,17 @@
 <template>
   <div class="screen-wrapper">
     <!-- Quiz questions section -->
+    <h2 class="question-header" v-if="currentQuestionIndex < currentTest.length">{{ currentQuestion.question }}</h2>
+    <h2 class="results-header" v-else>Результаты</h2>
+    <div class="content-area overflowed-container">
     <div v-if="currentQuestionIndex < currentTest.length" class="question-section">
       <transition name="fade" mode="out-in">
-        <div :key="currentQuestionIndex" class="question-container">
-          <h2 class="question-header">{{ currentQuestion.question }}</h2>
-          <div class="answers-container">
+        <div :key="currentQuestionIndex" class="buttons-container">
+<!--          <div class="answers-container">-->
             <button
                 v-for="(answer, index) in currentQuestion.answers"
                 :key="index"
-                class="answer-button"
+                class="button answer-button"
                 :class="{
                 'correct': showResults && answer.is_correct,
                 'incorrect': showResults && selectedAnswerIndex === index && !answer.is_correct
@@ -19,15 +21,14 @@
             >
               {{ answer.text }}
             </button>
-          </div>
+<!--          </div>-->
         </div>
       </transition>
     </div>
-
     <!-- Results section -->
     <div v-else class="results-section">
       <div class="results-container">
-        <h2 class="results-header">Результаты</h2>
+
         <p class="results-text">
           Вы правильно ответили на {{ testsStore.correctAnswersCount }} вопросов из {{ currentTest.length }}
           ({{ calculatePercentage() }}%)
@@ -35,6 +36,7 @@
         <button class="back-button" @click="goBack">Вернуться к списку тестов</button>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -129,7 +131,7 @@ const calculatePercentage = () => {
 .question-container, .results-container {
   background-color: #f8f9fa;
   border-radius: 8px;
-  padding: 2rem;
+  padding: max(1dvw, 5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -146,21 +148,6 @@ const calculatePercentage = () => {
   gap: 0.8rem;
 }
 
-.answer-button {
-  padding: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  background-color: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 1rem;
-  width: 100%;
-  text-align: center;
-}
-
-.answer-button:hover:not(:disabled) {
-  background-color: #f0f0f0;
-}
 
 .answer-button.correct {
   background-color: rgba(76, 175, 80, 0.3);
@@ -208,6 +195,34 @@ const calculatePercentage = () => {
   opacity: 0;
 }
 
+.content-area {
+  min-height: 50vh;
+  //padding: 1rem;
+  width: 100%;
+  background-color: rgba(0,0,0,0);
+}
+
+button {
+  width: 100%;
+  margin: max(2dvh, 10px) 0;
+}
+
+.screen-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.overflowed-container {
+  align-items: center;
+  min-width: 1dvh;
+  max-height: 60dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
 @keyframes pulse-green {
   0% {
     box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
@@ -229,6 +244,33 @@ const calculatePercentage = () => {
   }
   100% {
     box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+@media (pointer: coarse) and (hover: none) and (orientation: landscape) {
+  .content-area {
+    flex-grow: 1;
+  }
+
+  h2 {
+    flex-grow: 0;
+    max-width: 30dvw;
+  }
+
+  .screen-wrapper {
+    flex-direction: row;
+  }
+
+  .buttons-container {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    grid-auto-flow: row;
+    gap: 10px;
+  }
+
+  .answer-button {
+    margin: 0;
   }
 }
 </style>

@@ -117,7 +117,7 @@ export default defineComponent({
 }
 
 button {
-  max-width: 30%;
+  width: 100%;
   margin: max(2dvh, 10px) 0;
 }
 
