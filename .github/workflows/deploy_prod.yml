@@ -1,0 +1,55 @@
+name: Deploy to Remote Prod Server
+
+on:
+  push:
+    branches:
+      - prod
+
+jobs:
+  deploy_prod:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY_PROD }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p ${{ secrets.DEPLOY_PORT_PROD }} -t ed25519 ${{ secrets.DEPLOY_HOST_PROD }} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+
+      - name: Push to server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST_PROD }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER_PROD }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT_PROD }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH_PROD }}
+        run: |
+          rsync -avz --delete -e "ssh -p $DEPLOY_PORT" \
+            --exclude '.git*' \
+            --exclude 'node_modules' \
+            --exclude '**/__pycache__' \
+            --exclude '**/media' \
+            --exclude '**/locale' \
+            ./ $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+
+      - name: Deploy
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST_PROD }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER_PROD }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT_PROD }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH_PROD }}
+        run: |
+          ssh -p $DEPLOY_PORT $DEPLOY_USER@$DEPLOY_HOST '
+            echo '"'"'${{ secrets.ENV_FILE_PROD }}'"'"' > '"$DEPLOY_PATH"'/.env
+
+            docker compose -f '"$DEPLOY_PATH"'/compose.yml up -d --build --force-recreate
+          '
+
+      - name: Cleanup SSH files
+        if: always()
+        run: |
+          rm -rf ~/.ssh

@@ -27,3 +27,7 @@ coverage
 *.sw?
 
 *.tsbuildinfo
+
+.env
+.env.beta
+.env.prod
