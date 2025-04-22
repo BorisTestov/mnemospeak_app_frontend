@@ -22,7 +22,6 @@ const routes = [
     {path: '/quiz', name: 'Quiz', component: QuizScreen},
     {path: '/flashcards', name: 'Flashcards', component: FlashcardScreen},
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
-    {path: '/topic/:topicId', name: 'Topic', component: TopicScreen},
     {path: '/lesson', name: 'Lesson', component: LessonScreen},
     {path: '/lessontests', name: 'LessonTests', component: LessonTests},
     {path: '/test', name: 'Test', component: Test},

@@ -1,7 +1,7 @@
 <template>
   <div class="screen-wrapper">
     <!-- Quiz questions section -->
-    <h2 class="question-header" v-if="currentQuestionIndex < currentTest.length">{{ currentQuestion.question }}</h2>
+    <h2 class="question-header" v-if="currentQuestionIndex < currentTest.length">{{ currentQuestion.question.text }}</h2>
     <h2 class="results-header" v-else>Результаты</h2>
     <div class="content-area overflowed-container">
     <div v-if="currentQuestionIndex < currentTest.length" class="question-section">
@@ -76,10 +76,12 @@ const currentQuestion = computed(() => {
   return currentTest.value[currentQuestionIndex.value];
 });
 
+
 // Methods
 const handleAnswerClick = (answer, index) => {
   selectedAnswerIndex.value = index;
   showResults.value = true;
+  console.log(currentQuestion.answers);
 
   if (answer.is_correct) {
     testsStore.incrementCorrectAnswers();

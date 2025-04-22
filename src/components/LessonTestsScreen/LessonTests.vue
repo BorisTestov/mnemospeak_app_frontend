@@ -25,6 +25,7 @@ import {useLessonStore} from "@stores/LessonSettings";
 import {useTestsDataStore} from "@stores/TestsData";
 import topicsConfig from '@/config/topics'
 import {get} from "@utils/api";
+import {get_tests_by_lesson_id} from "@utils/api_calls.ts";
 
 export default defineComponent({
   name: "LessonTestsScreen",
@@ -50,17 +51,9 @@ export default defineComponent({
       try {
         loading.value = true;
         try {
-          console.log(`Fetching tests for lesson ID: ${lessonId.value}`);
-          const data = await get(`/quizzes/get_by_lesson_id/${lessonId.value}`);
-          console.log('API Response:', data);
-
-          if (data && Array.isArray(data)) {
-            testsStore.setTests(data);
-            tests.value = data;
-          } else {
-            console.warn('API response not in expected format');
-            throw new Error('Invalid data format received from server');
-          }
+          const data = await get_tests_by_lesson_id();
+          testsStore.setTests(data);
+          tests.value = data;
         } catch (apiErr) {
           console.error('API request failed:', apiErr);
           error.value = `Failed to load lesson data: ${apiErr.message || 'Unknown error'}`;
@@ -117,7 +110,7 @@ export default defineComponent({
 }
 
 button {
-  width: 100%;
+  width: 95%;
   margin: max(2dvh, 10px) 0;
 }
 

@@ -43,9 +43,6 @@ export function useNavigation() {
             router.push({ name: 'Flashcards' })
         },
 
-        goNouns: (): void => {
-            router.push({ name: 'Nouns' })
-        },
 
         goLesson: (lessonId: Number, hasTests: Boolean = false): void => {
             lessonStore.setLessonProps({
@@ -59,8 +56,8 @@ export function useNavigation() {
             router.push({name: 'LessonTests'})
         },
 
-        goTopic: (topicId: string) => {
-            router.push({ name: 'Topic', params: { topicId } })
+        goTopic: () => {
+            router.push({ name: 'Lesson' })
         },
 
         goTest: () => {

@@ -1,5 +1,6 @@
 // src/services/healthCheckService.ts
 import { get } from '@utils/api';
+import {get_healthcheck} from "@utils/api_calls";
 
 /**
  * Interface for health check response
@@ -15,17 +16,7 @@ interface HealthCheckResponse {
  */
 export const checkHealth = async (): Promise<boolean> => {
     try {
-        // Using your existing fetch utility with a short timeout
-        const response = await get<HealthCheckResponse>(
-            '/healthcheck',
-            {},
-            false
-        );
-        console.log("STATUS");
-        console.log(response.status);
-        console.log(response.status.toLowerCase() === 'OK');
-        // Return true if status is "ok" or whatever indicates healthy status in your API
-        return response.status.toLowerCase() === 'ok';
+        return await get_healthcheck()
     } catch (error) {
         console.error('Health check failed:', error);
         return false;
