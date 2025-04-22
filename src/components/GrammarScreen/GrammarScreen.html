@@ -2,6 +2,10 @@
     <h2 class="header">Темы по грамматике</h2>
 
     <div class="container overflowed-container">
-        <button class="topic-btn" @click="goTopic('nouns')">Существительные</button>
+
+        <button v-for="lesson in lessons" :key="lesson.name"
+                class="topic-btn"
+                @click="setTopicName(lesson.name, lesson.has_tests, lesson.id)">{{ lesson.name }}
+        </button>
     </div>
 </div>

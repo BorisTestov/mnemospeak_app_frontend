@@ -5,7 +5,7 @@
     <HTMLLoader
         v-else
         :title="lessonTitle"
-        :files="lessonFiles"
+        :data="lessonData"
         :has-tests="hasTests"
         @error="handleLoaderError"
     />
@@ -18,6 +18,7 @@ import { useNavigation } from '@utils/navigation';
 import HTMLLoader from '@components/HTMLLoader/HTMLLoader.vue';
 import { get } from '@utils/api';
 import {useLessonStore} from "@stores/LessonSettings";
+import {get_lesson_by_id} from "@utils/api_calls";
 
 export default defineComponent({
   name: "LessonScreen",
@@ -32,69 +33,39 @@ export default defineComponent({
 
     const lessonStore = useLessonStore()
     const hasTests = computed(() => lessonStore.has_tests)
-    const lessonId = computed(() => lessonStore.lesson_id)
+    const lessonData = ref('');
 
 
 
     const handleLoaderError = (err) => {
       console.error('HTMLLoader error:', err);
-      error.value = `Error loading content: ${err}`;
+      error.value = `Ошибка загрузки контента: ${err}`;
     };
 
     onMounted(async () => {
       try {
         loading.value = true;
-
-        // No fallback data - show error if API fails
-        let parts = [];
+        let parts = null;
 
         try {
-          console.log(`Fetching lesson parts for ID: ${lessonId.value}`);
-          const data = await get(`/lessons/${lessonId.value}/parts`);
-          console.log('API Response:', data);
-
-          if (data && Array.isArray(data)) {
-            parts = data;
-          } else {
-            console.warn('API response not in expected format');
-            throw new Error('Invalid data format received from server');
+          parts = await get_lesson_by_id();
+          console.log(parts);
+          if (parts.length === 0) {
+            error.value = 'Части уроков не найдены';
           }
-        } catch (apiErr) {
-          console.error('API request failed:', apiErr);
-          error.value = `Failed to load lesson data: ${apiErr.message || 'Unknown error'}`;
-          loading.value = false;
-          return; // Stop execution if API fails
+        } catch (err) {
+          console.error("Error fetching lessons:", err)
+        } finally {
+          loading.value = false
         }
-
-        // Show error if no parts found
-        if (parts.length === 0) {
-          error.value = 'No lesson parts found';
-          loading.value = false;
-          return;
-        }
-
         // Extract lesson title from first part
         lessonTitle.value = parts[0]?.title || 'Lesson';
+        lessonData.value = parts?.map(part => (part.content));
 
-        // Get file paths
-        const filePaths = parts
-            .filter(part => Boolean(part.file_path)) // Only include parts with a file_path
-            .sort((a, b) => a.order - b.order) // Sort ascending by order
-            .map(part => ({
-              lesson_id: part.lesson_id,
-              order: part.order,
-              id: part.id,
-              file_path: part.file_path
-            }));
 
-        if (filePaths.length === 0) {
-          error.value = 'No valid files found for this lesson';
-        } else {
-          lessonFiles.value = filePaths;
-        }
       } catch (err) {
         console.error('Error in component setup:', err);
-        error.value = `Component error: ${err.message || 'Unknown error'}`;
+        error.value = `Ошибка компонента: ${err.message || 'Неизвестная ошибка'}`;
       } finally {
         loading.value = false;
       }
@@ -102,6 +73,7 @@ export default defineComponent({
 
     return {
       lessonTitle,
+      lessonData,
       lessonFiles,
       loading,
       error,

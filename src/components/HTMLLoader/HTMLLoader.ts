@@ -9,7 +9,7 @@ export default defineComponent({
             type: String,
             default: ''
         },
-        files: {
+        data: {
             type: Array as PropType<Object[]>,
             required: true
         },
@@ -36,23 +36,14 @@ export default defineComponent({
         const hasTests = ref<boolean>(props.hasTests);
 
         const loadContent = async (index: number): Promise<void> => {
-            console.log("1");
-            if (index < 0 || index >= props.files.length) {
+            if (index < 0 || index >= props.data.length) {
                 console.error('Invalid file index:', index);
                 return;
             }
 
             loading.value = true;
             try {
-                // Build the full path to the file
-                const data = props.files[index];
-                const filePath = `${props.basePath}${props.files[index]}`;
-                const lesson_id = data.lesson_id;
-                const id = data.id;
-                console.log(filePath);
-                const response = await fetchData(`/lessons/${lesson_id}/parts/${id}/content`, {method: 'GET'}, false);
-                console.log(response);
-                currentContent.value = response;
+                currentContent.value = props.data[index];
                 currentIndex.value = index;
             } catch (error: any) {
                 console.error('Error loading content:', error);
@@ -69,7 +60,7 @@ export default defineComponent({
         };
 
         const loadNext = (): void => {
-            if (currentIndex.value < props.files.length - 1) {
+            if (currentIndex.value < props.data.length - 1) {
                 loadContent(currentIndex.value + 1);
             }
         };
