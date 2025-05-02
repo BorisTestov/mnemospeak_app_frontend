@@ -3,6 +3,7 @@ import {useLevelStore} from "../stores/LanguageLevel";
 import {useLessonStore} from "../stores/LessonSettings";
 import {computed, ref} from "vue";
 import {useTestsDataStore} from "../stores/TestsData";
+import {debugMessage} from "./debug";
 
 export const backend_healthcheck = async () => {
     await get('/healthcheck', {}, false);
@@ -16,6 +17,30 @@ export async function get_all_words(): Promise<Word[]> {
         return await get(`/flashcards/?level=${currentLevel}`) as Word[];
     } catch (error) {
         console.error('Error fetching words:', error);
+        throw error;
+    }
+}
+
+export async function get_flashcard_phrases(): Promise<Word[]> {
+    const levelStore = useLevelStore();
+    const currentLevel = levelStore.currentLevel;
+
+    try {
+        return await get(`/flashcards/?phrases=true&level=${currentLevel}`) as Word[];
+    } catch (error) {
+        console.error('Error fetching phrases:', error);
+        throw error;
+    }
+}
+
+export async function get_flashcard_useful_words(): Promise<Word[]> {
+    const levelStore = useLevelStore();
+    const currentLevel = levelStore.currentLevel;
+
+    try {
+        return await get(`/flashcards/?useful_words=true&level=${currentLevel}`) as Word[];
+    } catch (error) {
+        console.error('Error fetching useful words:', error);
         throw error;
     }
 }
@@ -88,5 +113,21 @@ export async function get_tests_by_lesson_id(): Promise {
     } else {
         console.warn('API response not in expected format');
         throw new Error('Invalid data format received from server');
+    }
+}
+
+export async function check_subscription(userId: number): Promise<boolean> {
+    try {
+        const response = await get<SubscriptionResponse>(
+            `/check_subscription?user_id=${userId}`,
+            {},
+            true
+        );
+        await debugMessage(response);
+        await debugMessage(response.is_active);
+        return response.is_active;
+    } catch (error) {
+        alert('Subscription check failed:', error);
+        return false;
     }
 }

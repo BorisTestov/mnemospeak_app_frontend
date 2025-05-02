@@ -1,0 +1,40 @@
+<div class="screen-wrapper">
+    <h2 class="header">Флеш-карты</h2>
+    <div class="flashcard-container">
+        <div
+                class="flashcard"
+                :class="{ flipped: isFlipped, loading: loading }"
+                @click="flipCard"
+        >
+            <div class="flashcard-inner">
+                <div class="flashcard-front">
+                    <div v-if="loading" class="rolling-animation-container">
+                        <img src="/loader.png" class="rolling-image" alt="Загрузка..." />
+                    </div>
+                    <template v-else>
+                        <p class="word">{{ currentCard?.phrase || 'Загрузка...' }}</p>
+                        <img v-if="currentCard?.image" :src="currentCard.image" class="card-image" alt="word image">
+                        <p class="card-info">{{ currentIndex + 1 }} / {{ cards.length }}</p>
+                    </template>
+                </div>
+                <div class="flashcard-back">
+                    <div v-if="loading" class="rolling-animation-container">
+                        <img src="/loader.png" class="rolling-image" alt="Загрузка..." />
+                    </div>
+                    <template v-else>
+                        <p class="translation">{{ currentCard?.translation || 'Загрузка...' }}</p>
+                        <p class="card-info">{{ currentIndex + 1 }} / {{ cards.length }}</p>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="button-container">
+        <button class="nav-arrow prev-arrow" @click="prevCard" :disabled="loading || currentIndex === 0">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-arrow next-arrow" @click="nextCard" :disabled="loading || currentIndex === cards.length - 1">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+</div>
