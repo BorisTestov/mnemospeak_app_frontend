@@ -43,6 +43,14 @@ export function useNavigation() {
             router.push({ name: 'Flashcards' })
         },
 
+        goPhrases: (): void => {
+            router.push({ name: 'Phrases' })
+        },
+
+        goUsefulWords: (): void => {
+            router.push({ name: 'UsefulWords' })
+        },
+
 
         goLesson: (lessonId: Number, hasTests: Boolean = false): void => {
             lessonStore.setLessonProps({

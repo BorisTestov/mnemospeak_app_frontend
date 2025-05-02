@@ -6,7 +6,8 @@ import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';
 import HealthCheckWrapper from '@components/HealthCheckWrapper.vue';
-
+import TelegramAuthWrapper from '@components/TelegramAuthWrapper.vue';
+import SubscriptionWrapper from '@components/SubscriptionWrapper.vue';
 
 export default defineComponent({
     name: "App",
@@ -14,7 +15,9 @@ export default defineComponent({
         SplashScreen,
         ErrorToast,
         Modal,
-        HealthCheckWrapper
+        HealthCheckWrapper,
+        TelegramAuthWrapper,
+        SubscriptionWrapper
     },
     setup() {
         const route = useRoute();

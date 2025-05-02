@@ -7,11 +7,12 @@ import GrammarScreen from '@components/GrammarScreen/GrammarScreen.vue'
 import VocabScreen from '@components/VocabScreen/VocabScreen.vue'
 import QuizScreen from "@components/QuizScreen/QuizScreen.vue";
 import StatisticsScreen from "@components/StatisticsScreen/StatisticsScreen.vue";
+import PhrasesScreen from "@components/PhrasesScreen/PhrasesScreen.vue";
+import UsefulWordsScreen from "@components/UsefulWordsScreen/UsefulWordsScreen.vue";
 import FlashcardScreen from "@components/FlashcardScreen/FlashcardScreen.vue";
 import LessonScreen from "@components/Lessons/Lessons.vue";
 import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
 import Test from "@components/TestScreen/TestScreen.vue";
-import TopicScreen from '@/components/TopicScreen.vue'
 
 const routes = [
     {path: '/', name: 'Home', component: MainScreen},
@@ -21,6 +22,8 @@ const routes = [
     {path: '/vocab', name: 'Vocab', component: VocabScreen},
     {path: '/quiz', name: 'Quiz', component: QuizScreen},
     {path: '/flashcards', name: 'Flashcards', component: FlashcardScreen},
+    {path: '/phrases', name: 'Phrases', component: PhrasesScreen},
+    {path: '/usefulwords', name: 'UsefulWords', component: UsefulWordsScreen},
     {path: '/statistics', name: 'Statistics', component: StatisticsScreen},
     {path: '/lesson', name: 'Lesson', component: LessonScreen},
     {path: '/lessontests', name: 'LessonTests', component: LessonTests},
