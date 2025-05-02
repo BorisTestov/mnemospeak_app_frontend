@@ -127,7 +127,8 @@ export async function check_subscription(userId: number): Promise<boolean> {
         await debugMessage(response.is_active);
         return response.is_active;
     } catch (error) {
-        alert('Subscription check failed:', error);
+        debugMessage(`Subscription check error: ${error}`);
+        console.error('Subscription check failed:', error);
         return false;
     }
 }

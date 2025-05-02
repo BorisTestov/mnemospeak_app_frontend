@@ -1,12 +1,12 @@
-import { ref, computed, onMounted, nextTick, watch} from 'vue'
-import { useNavigation } from '@utils/navigation'
-import { Word } from '@utils/api_models'
+import {ref, computed, onMounted, nextTick, watch} from 'vue'
+import {useNavigation} from '@utils/navigation'
+import {Word} from '@utils/api_models'
 import {get_flashcard_phrases} from "../../utils/api_calls";
 
 export default {
     name: "PhrasesScreen",
     setup() {
-        const { goBack } = useNavigation()
+        const {goBack} = useNavigation()
 
         const cards = ref<Word[]>([])
         const currentIndex = ref(0)
@@ -40,8 +40,7 @@ export default {
         }
 
         const nextCard = () => {
-            if (isFlipped.value === true)
-            {
+            if (isFlipped.value === true) {
                 flipCard();
                 setTimeout(() => {
                     if (currentIndex.value < cards.value.length - 1 && !loading.value) {
@@ -50,9 +49,7 @@ export default {
                     }
                     adjustFontSize();
                 }, 500);
-            }
-            else
-            {
+            } else {
                 if (currentIndex.value < cards.value.length - 1 && !loading.value) {
                     currentIndex.value++
                     isFlipped.value = false
@@ -62,8 +59,7 @@ export default {
         }
 
         const prevCard = () => {
-            if (isFlipped.value === true)
-            {
+            if (isFlipped.value === true) {
                 flipCard();
                 setTimeout(() => {
                     if (currentIndex.value > 0 && !loading.value) {
@@ -72,9 +68,7 @@ export default {
                     }
                     adjustFontSize();
                 }, 500);
-            }
-            else
-            {
+            } else {
                 if (currentIndex.value > 0 && !loading.value) {
                     currentIndex.value--
                     isFlipped.value = false
@@ -98,18 +92,50 @@ export default {
 
         const adjustFontSize = () => {
             nextTick(() => {
-                const element = document.querySelector('.flashcard-front .word') as HTMLElement;
+                let element = document.querySelector('.flashcard-front .word') as HTMLElement;
                 if (!element) return;
 
                 // Start with the largest font size
                 element.classList.remove('size-medium', 'size-small', 'size-x-small');
                 element.classList.add('size-large');
 
-                const parent = element.parentElement;
+                let parent = element.parentElement;
                 if (!parent) return;
 
-                const parentWidth = parent.clientWidth;
-                const parentHeight = parent.clientHeight;
+                let parentWidth = parent.clientWidth;
+                let parentHeight = parent.clientHeight;
+
+                // First, check if the text fits with the largest font size
+                if (element.scrollWidth > parentWidth * 0.9 || element.scrollHeight > parentHeight * 0.4) {
+                    // Try medium size
+                    element.classList.remove('size-large');
+                    element.classList.add('size-medium');
+
+                    if (element.scrollWidth > parentWidth * 0.9 || element.scrollHeight > parentHeight * 0.4) {
+                        // Try small size
+                        element.classList.remove('size-medium');
+                        element.classList.add('size-small');
+
+                        if (element.scrollWidth > parentWidth * 0.9 || element.scrollHeight > parentHeight * 0.4) {
+                            // Finally try x-small
+                            element.classList.remove('size-small');
+                            element.classList.add('size-x-small');
+                        }
+                    }
+                }
+
+                element = document.querySelector('.flashcard-back .translation') as HTMLElement;
+                if (!element) return;
+
+                // Start with the largest font size
+                element.classList.remove('size-medium', 'size-small', 'size-x-small');
+                element.classList.add('size-large');
+
+                parent = element.parentElement;
+                if (!parent) return;
+
+                parentWidth = parent.clientWidth;
+                parentHeight = parent.clientHeight;
 
                 // First, check if the text fits with the largest font size
                 if (element.scrollWidth > parentWidth * 0.9 || element.scrollHeight > parentHeight * 0.4) {

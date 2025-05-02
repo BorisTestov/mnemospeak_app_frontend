@@ -1,10 +1,21 @@
+.screen-wrapper {
+    padding-top: 0;
+    /*border: 1px solid blue;*/
+}
+.header {
+    margin-top: 0;
+    padding-top: 0;
+    /*border: 1px solid green;*/
+}
+
 .flashcard-container {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16px;
     width: 100%;
-    height: min(70vh, auto);
+    height: 69vh;
+    /*border: 1px solid red;*/
     margin-top: auto;
 }
 
@@ -13,13 +24,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 20vh;
+    margin-top: 1vh;
     width: 100%;
 }
 
 .flashcard {
     width: 75vw;
-    height: 45vh;
+    height: 100%;
     max-width: 300px;
     background-color: var(--background-color);
     border-radius: 16px;
@@ -70,7 +81,7 @@
 }
 
 .word, .translation {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
     text-shadow: var(--outline);
