@@ -9,7 +9,7 @@
         <div :key="currentQuestionIndex" class="buttons-container">
 <!--          <div class="answers-container">-->
             <button
-                v-for="(answer, index) in currentQuestion.answers"
+                v-for="(answer, index) in shuffledAnswers"
                 :key="index"
                 class="button answer-button"
                 :class="{
@@ -78,20 +78,29 @@ const currentQuestion = computed(() => {
 
 
 // Methods
+// Add shuffled answers computed property
+const shuffledAnswers = computed(() => {
+  if (!currentQuestion.value) return [];
+  const answers = [...currentQuestion.value.answers];
+  for (let i = answers.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [answers[i], answers[j]] = [answers[j], answers[i]];
+  }
+  return answers;
+});
+
+// Modify handleAnswerClick to work with shuffled answers
 const handleAnswerClick = (answer, index) => {
   selectedAnswerIndex.value = index;
   showResults.value = true;
-  console.log(currentQuestion.answers);
 
   if (answer.is_correct) {
     testsStore.incrementCorrectAnswers();
   }
 
-  // Wait for animation to complete before moving to next question
   setTimeout(() => {
     moveToNextQuestion();
-  }, 1500);
-};
+  }, 1500);};
 
 const moveToNextQuestion = () => {
   showResults.value = false;
@@ -148,6 +157,12 @@ const calculatePercentage = () => {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: var(--light-yellow);
+    transform: none;
 }
 
 
