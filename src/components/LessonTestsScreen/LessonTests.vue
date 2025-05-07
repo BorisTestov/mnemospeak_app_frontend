@@ -10,7 +10,7 @@
           @click="handleButtonClick(index)"
           class="test-button"
       >
-        Тест {{ index + 1 }}
+        {{ index === 0 ? 'Общий тест' : `Тест ${index}` }}
       </button>
       </div>
     </div>
