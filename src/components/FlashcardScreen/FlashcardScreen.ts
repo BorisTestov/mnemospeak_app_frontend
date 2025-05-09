@@ -1,7 +1,9 @@
-import { ref, computed, onMounted, nextTick, watch} from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick, watch} from 'vue'
 import { useNavigation } from '@utils/navigation'
 import { Word } from '@utils/api_models'
 import { get_all_words } from '@utils/api_calls'
+import { useFlashCardStore } from '@stores/FlashCardState'
+
 
 export default {
     name: "FlashcardScreen",
@@ -12,6 +14,8 @@ export default {
         const currentIndex = ref(0)
         const isFlipped = ref(false)
         const loading = ref(true)
+        const flashCardStore = useFlashCardStore()
+        const category = computed(() => flashCardStore.category)
 
         const currentCard = computed(() => {
             if (cards.value.length === 0) return null
@@ -23,15 +27,28 @@ export default {
             isFlipped.value = false
 
             try {
-                cards.value = await get_all_words()
-                currentIndex.value = 0
-                cards.value = shuffleCards(cards.value)
+                // Check if we have cached cards for current level and category
+                if (flashCardStore.currentLevelData.cards[category.value]) {
+                    cards.value = flashCardStore.currentLevelData.cards[category.value]
+                    currentIndex.value = flashCardStore.currentLevelData.positions[category.value] || 0
+                } else {
+                    cards.value = await get_all_words()
+                    cards.value = shuffleCards(cards.value)
+                    flashCardStore.setCards(category.value, cards.value)
+                    currentIndex.value = 0
+                }
             } catch (err) {
                 console.error("Error fetching flashcards:", err)
             } finally {
                 loading.value = false
             }
         }
+
+        watch(currentIndex, (newIndex) => {
+            if (category.value) {
+                flashCardStore.setPosition(category.value, newIndex)
+            }
+        })
 
         const flipCard = () => {
             if (!loading.value) {
@@ -153,7 +170,13 @@ export default {
 
         onMounted(() => {
             fetchCards()
-        })
+        });
+
+        onUnmounted(() => {
+            if (category.value) {
+                flashCardStore.setPosition(category.value, currentIndex.value)
+            }
+        });
 
 
         return {
