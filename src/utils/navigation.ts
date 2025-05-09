@@ -39,6 +39,10 @@ export function useNavigation() {
             router.push({name: 'Statistics'})
         },
 
+        goFlashcardsModes: (): void => {
+            router.push({ name: 'FlashcardsModes' })
+        },
+
         goFlashcards: (): void => {
             router.push({ name: 'Flashcards' })
         },

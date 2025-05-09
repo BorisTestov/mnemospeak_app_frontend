@@ -13,6 +13,7 @@ import FlashcardScreen from "@components/FlashcardScreen/FlashcardScreen.vue";
 import LessonScreen from "@components/Lessons/Lessons.vue";
 import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
 import Test from "@components/TestScreen/TestScreen.vue";
+import FlashCardModeScreen from "./components/FlashCardModeScreen.vue";
 
 const routes = [
     {path: '/', name: 'Home', component: MainScreen},
@@ -28,6 +29,7 @@ const routes = [
     {path: '/lesson', name: 'Lesson', component: LessonScreen},
     {path: '/lessontests', name: 'LessonTests', component: LessonTests},
     {path: '/test', name: 'Test', component: Test},
+    {path: '/flashcardsmodes', name: 'FlashcardsModes', component: FlashCardModeScreen},
 ]
 
 const router = createRouter({

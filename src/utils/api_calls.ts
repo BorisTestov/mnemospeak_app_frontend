@@ -3,6 +3,7 @@ import {useLevelStore} from "../stores/LanguageLevel";
 import {useLessonStore} from "../stores/LessonSettings";
 import {computed, ref} from "vue";
 import {useTestsDataStore} from "../stores/TestsData";
+import { useFlashCardStore } from '@stores/FlashCardState'
 import {debugMessage} from "./debug";
 
 export const backend_healthcheck = async () => {
@@ -12,9 +13,11 @@ export const backend_healthcheck = async () => {
 export async function get_all_words(): Promise<Word[]> {
     const levelStore = useLevelStore();
     const currentLevel = levelStore.currentLevel;
+    const flashCardStore = useFlashCardStore()
+    const category = computed(() => flashCardStore.category)
 
     try {
-        return await get(`/flashcards/?level=${currentLevel}`) as Word[];
+        return await get(`/flashcards/?level=${currentLevel}&category=${category.value}`) as Word[];
     } catch (error) {
         console.error('Error fetching words:', error);
         throw error;
