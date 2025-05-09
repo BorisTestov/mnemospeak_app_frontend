@@ -1,7 +1,15 @@
 <template>
   <div class="screen-wrapper">
     <!-- Quiz questions section -->
-    <h2 class="question-header" v-if="currentQuestionIndex < currentTest.length">{{ currentQuestion.question.text }}</h2>
+    <div v-if="currentQuestionIndex < currentTest.length">
+      <TranslationToggle :timeout="translationTimeout" :auto-hide="true">
+        <template #default="{ showTranslation }">
+          <h2 class="question-header">
+            {{ showTranslation ? currentQuestion.question.translation : currentQuestion.question.text }}
+          </h2>
+        </template>
+      </TranslationToggle>
+    </div>
     <h2 class="results-header" v-else>Результаты</h2>
     <div class="content-area overflowed-container">
     <div v-if="currentQuestionIndex < currentTest.length" class="question-section">
@@ -45,7 +53,7 @@ import { ref, computed, onMounted, nextTick } from 'vue';
 import { useRouter } from 'vue-router';
 import { useTestsDataStore } from '@stores/TestsData';
 import {useNavigation} from "@utils/navigation";
-
+import TranslationToggle from '@/components/TranslationToggle.vue';
 const router = useRouter();
 const testsStore = useTestsDataStore();
 
@@ -53,8 +61,9 @@ const testsStore = useTestsDataStore();
 const currentQuestionIndex = ref(0);
 const showResults = ref(false);
 const selectedAnswerIndex = ref(null);
-
+const translationTimeout = 10000;
 const {goBack} = useNavigation();
+const showTranslation = ref(false);
 
 // Reset correct answers on component mount
 onMounted(() => {
@@ -137,6 +146,7 @@ const calculatePercentage = () => {
 .question-section, .results-section {
   width: 100%;
   max-width: 600px;
+  justify-self: center;
 }
 
 .question-container, .results-container {
