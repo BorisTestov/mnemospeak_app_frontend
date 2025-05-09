@@ -2,9 +2,11 @@ import {ref, computed, onMounted, nextTick, watch} from 'vue'
 import {useNavigation} from '@utils/navigation'
 import {Word} from '@utils/api_models'
 import {get_flashcard_phrases} from "../../utils/api_calls";
+import TranslationToggle from "../TranslationToggle.vue";
 
 export default {
     name: "PhrasesScreen",
+    components: {TranslationToggle},
     setup() {
         const {goBack} = useNavigation()
 
@@ -12,6 +14,9 @@ export default {
         const currentIndex = ref(0)
         const isFlipped = ref(false)
         const loading = ref(true)
+
+        const translationTimeout = null;
+        const showTranslation = ref(false);
 
         const currentCard = computed(() => {
             if (cards.value.length === 0) return null
@@ -193,6 +198,8 @@ export default {
             nextCard,
             prevCard,
             shuffleCards,
+            showTranslation,
+            translationTimeout,
             goBack
         }
     }
