@@ -47,6 +47,10 @@ export function useNavigation() {
             router.push({ name: 'Flashcards' })
         },
 
+        goLetterType: (): void => {
+            router.push({ name: 'LetterType' })
+        },
+
         goPhrases: (): void => {
             router.push({ name: 'Phrases' })
         },

@@ -14,6 +14,9 @@ import LessonScreen from "@components/Lessons/Lessons.vue";
 import LessonTests from "@components/LessonTestsScreen/LessonTests.vue";
 import Test from "@components/TestScreen/TestScreen.vue";
 import FlashCardModeScreen from "./components/FlashCardModeScreen.vue";
+import LetterTypeScreen from "./components/LetterTypeScreen.vue";
+import LetterPhrases from "./components/LetterPhrases.vue";
+import LetterPhrasesFlashcards from "./components/LetterPhrasesFlashcards.vue";
 
 const routes = [
     {path: '/', name: 'Home', component: MainScreen},
@@ -30,6 +33,9 @@ const routes = [
     {path: '/lessontests', name: 'LessonTests', component: LessonTests},
     {path: '/test', name: 'Test', component: Test},
     {path: '/flashcardsmodes', name: 'FlashcardsModes', component: FlashCardModeScreen},
+    {path: '/lettertypes', name: 'LetterType', component: LetterTypeScreen},
+    {path: '/letter-phrases', name: 'LetterPhrases', component: LetterPhrases},
+    {path: '/letter-phrases-flashcards', name: 'LetterPhrasesFlashcards', component: LetterPhrasesFlashcards},
 ]
 
 const router = createRouter({
