@@ -51,6 +51,16 @@ export const useLetterStore = defineStore('letter', {
         clearAll() {
             this.category = null
             this.levels = {}
+        },
+        clear() {
+            this.category = null
+            this.letterType = null
+            for (const level in this.levels) {
+                if (this.levels.hasOwnProperty(level)) {
+                    this.levels[level].positions = {}
+                    this.levels[level].phrases = {}
+                }
+            }
         }
     },
     persist: true

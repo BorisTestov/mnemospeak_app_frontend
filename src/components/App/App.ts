@@ -2,6 +2,8 @@ import { defineComponent, ref, onMounted, onUnmounted, watch, computed } from 'v
 import { useRoute, useRouter } from 'vue-router';
 import { useNavigation } from '@utils/navigation'
 import { useTelegramUserStore } from '@stores/TelegramUser';
+import { useFlashCardStore } from '@stores/FlashCardState';
+import { useLetterStore } from '@stores/LetterState';
 import SplashScreen from '@components/SplashScreen/SplashScreen.vue';
 import ErrorToast from '@components/ErrorNotification/ErrorNotification.vue';
 import Modal from '@components/SettingsModal/SettingsModal.vue';
@@ -28,7 +30,8 @@ export default defineComponent({
         const errorToast = ref(null);
         const mainRoutePath = '/';
         const showModal = ref(false);
-
+        const flashCardStore = useFlashCardStore();
+        const letterStore = useLetterStore();
 
         const handleBackButton = () => {
             if (router.currentRoute.value.path !== mainRoutePath) {
@@ -83,6 +86,8 @@ export default defineComponent({
         // };
 
         onMounted(() => {
+            flashCardStore.clearAll();
+            letterStore.clear();
             const isTelegramUser = telegramStore.initializeFromTelegram();
 
             if (route.path === mainRoutePath && firstLoad.value && isTelegramUser) {
