@@ -21,7 +21,7 @@ export default defineComponent({
   name: 'SubscriptionWrapper',
   setup() {
     const telegramStore = useTelegramUserStore();
-    const hasSubscription = ref<boolean>(false);
+    const hasSubscription = ref<boolean>(true);
     debugMessage(`user id ${telegramStore.user.id} has subscription ${hasSubscription.value}`);
 
     const checkSubscription = async (): Promise<void> => {
